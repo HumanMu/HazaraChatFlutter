@@ -1,0 +1,44 @@
+    Widget _entryField( String title, String controller ) {
+      return TextFormField(
+        // controller: controller,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: const BorderSide(
+              width: 2, 
+              color: Colors.lightGreen,
+            ),
+          ),
+          labelText: title,
+          filled: true,
+          fillColor: Colors.grey[800],
+          labelStyle: const TextStyle(
+            color: Colors.lightGreen,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(
+              width: 1,
+              color: Colors.red,
+            )
+          ),
+        ),
+      );
+    }
+
+
+    void _registerUser() async {
+      bool result = _verifyRegistrationInfo();
+
+      if(result == false) {
+        return;
+      }
+      else {
+        await AuthService(FirebaseAuth.instance).signUpWithEmailPassword(
+          fullname: _name,
+          email: _email,
+          password: _password1,
+          context: context,
+        );
+      }
+    }
